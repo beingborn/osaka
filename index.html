@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>오사카 여행 2026.08.21 – 08.23</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* ============ 디자인 토큰 ============ */
+:root{
+  --navy:#0B2B52;        /* 남색(藍) - primary */
+  --navy-600:#164a86;
+  --navy-50:#EEF3FA;
+  --red:#C8372D;         /* 주홍(朱) - accent */
+  --red-50:#FDF0EE;
+  --ink:#1A1D21;
+  --gray-700:#4A5058;
+  --gray-500:#767C85;
+  --gray-300:#D5D9DF;
+  --gray-200:#E7EAEF;
+  --gray-100:#F2F4F7;
+  --bg:#F7F8FA;
+  --white:#fff;
+  --wash:#FAF7F2;        /* 화지(和紙) 톤 */
+  --radius:14px;
+  --radius-sm:9px;
+  --shadow-sm:0 1px 3px rgba(11,43,82,.08);
+  --tab-h:52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Malgun Gothic",sans-serif;
+  background:var(--bg); color:var(--ink);
+  font-size:15px; line-height:1.6;
+  -webkit-text-size-adjust:100%;
+  word-break:keep-all;
+}
+img{max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:var(--navy-600);text-underline-offset:2px}
+
+.wrap{max-width:760px;margin:0 auto;background:var(--bg);min-height:100vh;
+  box-shadow:0 0 0 1px var(--gray-200)}
+
+/* ============ 헤더 (일본풍 오브젝트) ============ */
+.hero{
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 82% 26%, rgba(200,55,45,.92) 0 40px, transparent 41px),
+    linear-gradient(160deg,#0B2B52 0%,#123A6B 55%,#0B2B52 100%);
+  color:#fff; padding:26px 20px 22px;
+}
+/* 세이가이하(青海波) 물결 패턴 */
+.hero::before{
+  content:""; position:absolute; inset:auto 0 -6px 0; height:78px; opacity:.16;
+  background-image:
+    radial-gradient(circle at 12px 24px, transparent 9px, #fff 9px, #fff 10.5px, transparent 11px),
+    radial-gradient(circle at 0px 24px, transparent 9px, #fff 9px, #fff 10.5px, transparent 11px),
+    radial-gradient(circle at 24px 24px, transparent 9px, #fff 9px, #fff 10.5px, transparent 11px);
+  background-size:24px 24px;
+}
+/* 아사노하 느낌의 은은한 격자 */
+.hero::after{
+  content:""; position:absolute; inset:0; opacity:.07; pointer-events:none;
+  background-image:linear-gradient(45deg,#fff 1px,transparent 1px),linear-gradient(-45deg,#fff 1px,transparent 1px);
+  background-size:22px 22px;
+}
+.hero-in{position:relative;z-index:2}
+.hero .jp{font-size:12px;letter-spacing:.34em;color:rgba(255,255,255,.72);font-weight:600;margin:0}
+.hero h1{margin:5px 0 0;font-size:29px;line-height:1.25;font-weight:800;letter-spacing:-.02em}
+.hero h1 small{display:block;font-size:13px;font-weight:500;color:rgba(255,255,255,.8);letter-spacing:0;margin-top:7px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:600}
+.dday{position:absolute;right:20px;top:24px;z-index:3;width:82px;height:82px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.25)}
+.dday b{font-size:23px;font-weight:800;line-height:1}
+.dday span{font-size:10.5px;opacity:.9;margin-top:2px;letter-spacing:.06em}
+
+/* ============ 탭 ============ */
+.tabs{position:sticky;top:0;z-index:50;background:var(--white);
+  border-bottom:1px solid var(--gray-200);box-shadow:0 2px 8px rgba(11,43,82,.04)}
+.tabs-scroll{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs-scroll::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;height:var(--tab-h);padding:0 15px;font-size:14.5px;font-weight:600;color:var(--gray-500);
+  position:relative;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.tab .num{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;
+  border-radius:6px;background:var(--gray-100);color:var(--gray-500);font-size:11px;font-weight:700}
+.tab.active{color:var(--navy)}
+.tab.active .num{background:var(--navy);color:#fff}
+.tab.active::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:3px;
+  background:var(--navy);border-radius:3px 3px 0 0}
+
+/* ============ 레이아웃 ============ */
+.panel{display:none;padding:18px 16px 60px;animation:fade .22s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.sec{margin-bottom:22px}
+.sec-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 10px}
+.sec-title{display:flex;align-items:center;gap:8px;font-size:16.5px;font-weight:800;letter-spacing:-.01em;margin:0}
+.sec-title::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--red)}
+.sec-desc{font-size:12.5px;color:var(--gray-500);font-weight:500}
+
+.card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);overflow:hidden}
+.card + .card{margin-top:10px}
+
+/* 정보 목록 (KRDS 정의형) */
+.dl{display:grid;grid-template-columns:88px 1fr;gap:0;margin:0}
+.dl dt,.dl dd{margin:0;padding:11px 14px;border-top:1px solid var(--gray-200);font-size:14px}
+.dl dt{background:var(--gray-100);color:var(--gray-700);font-weight:700;font-size:13px}
+.dl dd{background:var(--white);font-weight:500}
+.dl dt:first-of-type,.dl dd:nth-of-type(1){border-top:0}
+
+/* 항공권 */
+.flight-top{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px dashed var(--gray-300);
+  background:var(--wash)}
+.flight-tag{font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:999px;letter-spacing:.02em}
+.tag-go{background:var(--navy);color:#fff}
+.tag-back{background:var(--red);color:#fff}
+.flight-air{font-size:13px;font-weight:700;color:var(--gray-700)}
+.flight-date{margin-left:auto;font-size:12.5px;color:var(--gray-500);font-weight:600}
+.route{display:grid;grid-template-columns:1fr 62px 1fr;align-items:center;padding:16px 14px 14px}
+.pt{text-align:center}
+.pt .time{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.pt .code{font-size:12.5px;font-weight:700;color:var(--navy);margin-top:3px}
+.pt .name{font-size:11.5px;color:var(--gray-500);margin-top:1px}
+.mid{text-align:center;color:var(--gray-500)}
+.mid .dur{font-size:11px;font-weight:700;margin-bottom:3px}
+.mid .line{height:1px;background:var(--gray-300);position:relative}
+.mid .line::after{content:"✈";position:absolute;right:-3px;top:50%;transform:translateY(-50%);
+  font-size:13px;color:var(--navy);background:var(--white);padding-left:2px}
+.flight-note{padding:0 16px 14px;margin:0;font-size:12px;color:var(--gray-500)}
+
+/* 캘린더 */
+.cal{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);padding:14px 12px 12px}
+.cal-head{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:12px}
+.cal-head b{font-size:16px;font-weight:800}
+.cal-nav{width:32px;height:32px;border-radius:8px;background:var(--gray-100);color:var(--gray-700);
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+.cal-nav:disabled{opacity:.3;cursor:default}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-dow{text-align:center;font-size:11.5px;font-weight:700;color:var(--gray-500);padding:4px 0}
+.cal-dow.sun{color:var(--red)}
+.cal-dow.sat{color:var(--navy-600)}
+.cal-cell{aspect-ratio:1/1;border-radius:10px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;font-size:14px;font-weight:600;color:var(--gray-700);background:transparent;position:relative}
+.cal-cell.blank{visibility:hidden}
+.cal-cell.trip{background:var(--navy-50);color:var(--navy);font-weight:800;cursor:pointer}
+.cal-cell.trip .dot{width:5px;height:5px;border-radius:50%;background:var(--red);margin-top:3px}
+.cal-cell.trip.on{background:var(--navy);color:#fff}
+.cal-cell.trip.on .dot{background:#fff}
+.cal-legend{display:flex;gap:12px;justify-content:center;margin-top:11px;font-size:11.5px;color:var(--gray-500)}
+.cal-legend i{display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--navy-50);
+  border:1px solid var(--navy);margin-right:4px;vertical-align:-1px}
+
+/* 타임라인 */
+.day-head{display:flex;align-items:center;gap:9px;padding:13px 16px;background:var(--navy);color:#fff}
+.day-badge{background:rgba(255,255,255,.16);border-radius:7px;padding:3px 8px;font-size:11.5px;font-weight:800}
+.day-head .d{font-size:15px;font-weight:800}
+.day-head .w{font-size:12px;color:rgba(255,255,255,.75);margin-left:auto}
+.tl{padding:6px 16px 14px}
+.tl-item{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--gray-100)}
+.tl-item:last-child{border-bottom:0}
+.tl-time{font-size:12.5px;font-weight:800;color:var(--navy);padding-top:1px}
+.tl-time.tbd{color:var(--gray-300)}
+.tl-body{position:relative;padding-left:16px}
+.tl-body::before{content:"";position:absolute;left:0;top:6px;width:8px;height:8px;border-radius:50%;
+  background:var(--white);border:2px solid var(--navy)}
+.tl-body::after{content:"";position:absolute;left:3.5px;top:18px;bottom:-16px;width:1px;background:var(--gray-200)}
+.tl-item:last-child .tl-body::after{display:none}
+.tl-title{font-size:14.5px;font-weight:700}
+.tl-sub{font-size:12.5px;color:var(--gray-500);margin-top:2px}
+.tl-item.fixed .tl-body::before{background:var(--red);border-color:var(--red)}
+
+/* 미정 표시 */
+.tbd-box{border:1px dashed var(--gray-300);background:repeating-linear-gradient(45deg,#fff,#fff 8px,#FBFCFD 8px,#FBFCFD 16px);
+  border-radius:var(--radius-sm);padding:14px;text-align:center;color:var(--gray-500);font-size:13px;font-weight:600}
+.badge-tbd{display:inline-block;background:var(--gray-100);color:var(--gray-500);border-radius:5px;
+  padding:1px 7px;font-size:11.5px;font-weight:700;margin-left:5px}
+
+/* 체크리스트 */
+.check{display:flex;align-items:flex-start;gap:11px;padding:12px 14px;border-top:1px solid var(--gray-100);cursor:pointer}
+.check:first-child{border-top:0}
+.check input{position:absolute;opacity:0;pointer-events:none}
+.box{flex:0 0 auto;width:21px;height:21px;border-radius:6px;border:1.8px solid var(--gray-300);background:#fff;
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;margin-top:1px;transition:.15s}
+.check.done .box{background:var(--navy);border-color:var(--navy)}
+.check.done .ctxt{color:var(--gray-500);text-decoration:line-through}
+.ctxt{font-size:14px;font-weight:600}
+.ctxt small{display:block;font-weight:500;font-size:12px;color:var(--gray-500);text-decoration:none;margin-top:1px}
+.prog{height:6px;border-radius:99px;background:var(--gray-200);overflow:hidden;margin:10px 2px 0}
+.prog i{display:block;height:100%;width:0;background:var(--navy);border-radius:99px;transition:width .3s}
+.prog-txt{font-size:12px;color:var(--gray-500);font-weight:600;margin:6px 2px 0}
+
+/* 리스트 (맛집·명소·교통) */
+.pl{display:flex;gap:12px;padding:13px 14px;border-top:1px solid var(--gray-100);align-items:flex-start}
+.pl:first-child{border-top:0}
+.pl-ico{flex:0 0 auto;width:38px;height:38px;border-radius:11px;background:var(--red-50);color:var(--red);
+  display:flex;align-items:center;justify-content:center;font-size:18px}
+.pl-ico.b{background:var(--navy-50);color:var(--navy)}
+.pl-t{font-size:14.5px;font-weight:700}
+.pl-s{font-size:12.5px;color:var(--gray-500);margin-top:2px}
+.pl-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--navy-600);background:var(--navy-50);
+  border-radius:5px;padding:1px 6px;margin-right:4px;margin-top:5px}
+
+/* 알림 박스 */
+.note{display:flex;gap:9px;background:var(--red-50);border:1px solid #F3D6D2;border-radius:var(--radius-sm);
+  padding:12px 13px;font-size:13px;color:#8A2A22;font-weight:500;line-height:1.55}
+.note.blue{background:var(--navy-50);border-color:#D3E0F2;color:#12406F}
+.note b{font-weight:800}
+
+/* 그리드·통계 */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:14px;
+  text-align:center;box-shadow:var(--shadow-sm)}
+.stat .k{font-size:11.5px;color:var(--gray-500);font-weight:700}
+.stat .v{font-size:20px;font-weight:800;margin-top:4px;letter-spacing:-.02em}
+.stat .u{font-size:12px;color:var(--gray-500);font-weight:600;margin-top:2px}
+
+table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
+.tb th,.tb td{padding:10px 12px;border-top:1px solid var(--gray-200);text-align:left}
+.tb thead th{background:var(--gray-100);border-top:0;font-size:12.5px;color:var(--gray-700);font-weight:700}
+.tb td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.tb tfoot td{background:var(--navy-50);font-weight:800;color:var(--navy);border-top:1.5px solid var(--navy)}
+
+.foot{padding:26px 16px 40px;text-align:center;color:var(--gray-500);font-size:12px}
+.foot .seal{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;
+  border:1.5px solid var(--red);color:var(--red);font-size:13px;font-weight:800;margin-bottom:8px;
+  writing-mode:vertical-rl;letter-spacing:.1em}
+
+@media (max-width:380px){
+  .dl{grid-template-columns:76px 1fr}
+  .pt .time{font-size:21px}
+  .hero h1{font-size:25px}
+  .dday{width:70px;height:70px}
+  .dday b{font-size:20px}
+}
+@media (min-width:640px){
+  .panel{padding:22px 22px 70px}
+  .g2{gap:12px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== 헤더 ===== -->
+  <header class="hero">
+    <div class="dday"><b id="ddayNum">D-</b><span>OSAKA</span></div>
+    <div class="hero-in">
+      <p class="jp">大阪 · OSAKA</p>
+      <h1>오사카 여행
+        <small>2026. 08. 21 (금) ~ 08. 23 (일) · 2박 3일</small>
+      </h1>
+      <div class="hero-meta">
+        <span class="chip">👥 2명</span>
+        <span class="chip">✈ 에어서울</span>
+        <span class="chip">🗾 간사이(KIX)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== 탭 ===== -->
+  <nav class="tabs">
+    <div class="tabs-scroll" id="tabs">
+      <button class="tab active" data-tab="info"><span class="num">1</span>기본정보</button>
+      <button class="tab" data-tab="sched"><span class="num">2</span>일정</button>
+      <button class="tab" data-tab="move"><span class="num">3</span>교통</button>
+      <button class="tab" data-tab="stay"><span class="num">4</span>숙소</button>
+      <button class="tab" data-tab="place"><span class="num">5</span>맛집·명소</button>
+      <button class="tab" data-tab="budget"><span class="num">6</span>예산</button>
+      <button class="tab" data-tab="prep"><span class="num">7</span>준비물</button>
+    </div>
+  </nav>
+
+  <!-- ===== 1. 기본정보 ===== -->
+  <section class="panel active" id="tab-info">
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">여행 개요</h2></div>
+      <div class="card">
+        <dl class="dl">
+          <dt>여행지</dt><dd>일본 오사카 (大阪)</dd>
+          <dt>기간</dt><dd>2026. 08. 21 (금) ~ 08. 23 (일) · <b>2박 3일</b></dd>
+          <dt>인원</dt><dd>2명</dd>
+          <dt>항공사</dt><dd>에어서울 (Air Seoul)</dd>
+          <dt>도착공항</dt><dd>간사이 국제공항 (KIX)</dd>
+          <dt>숙소</dt><dd>미정 <span class="badge-tbd">확정 필요</span></dd>
+          <dt>테마</dt><dd>미정 <span class="badge-tbd">작성 예정</span></dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head">
+        <h2 class="sec-title">항공편</h2>
+        <span class="sec-desc">현지시각 기준</span>
+      </div>
+
+      <div class="card">
+        <div class="flight-top">
+          <span class="flight-tag tag-go">가는 편</span>
+          <span class="flight-air">에어서울</span>
+          <span class="flight-date">08.21 (금)</span>
+        </div>
+        <div class="route">
+          <div class="pt"><div class="time">15:20</div><div class="code">ICN</div><div class="name">인천</div></div>
+          <div class="mid"><div class="dur">1h 40m</div><div class="line"></div></div>
+          <div class="pt"><div class="time">17:00</div><div class="code">KIX</div><div class="name">간사이</div></div>
+        </div>
+        <p class="flight-note">편명 미정 · 좌석 미정 · 공항 도착 권장 13:20 (2시간 전)</p>
+      </div>
+
+      <div class="card">
+        <div class="flight-top">
+          <span class="flight-tag tag-back">오는 편</span>
+          <span class="flight-air">에어서울</span>
+          <span class="flight-date">08.23 (일)</span>
+        </div>
+        <div class="route">
+          <div class="pt"><div class="time">18:00</div><div class="code">KIX</div><div class="name">간사이</div></div>
+          <div class="mid"><div class="dur">1h 55m</div><div class="line"></div></div>
+          <div class="pt"><div class="time">19:55</div><div class="code">ICN</div><div class="name">인천</div></div>
+        </div>
+        <p class="flight-note">편명 미정 · 좌석 미정 · 공항 도착 권장 16:00 (2시간 전)</p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">현지 정보</h2></div>
+      <div class="g2">
+        <div class="stat"><div class="k">시차</div><div class="v">없음</div><div class="u">한국과 동일</div></div>
+        <div class="stat"><div class="k">통화</div><div class="v">JPY ¥</div><div class="u">환율 미정</div></div>
+        <div class="stat"><div class="k">전압</div><div class="v">100V</div><div class="u">A타입 · 돼지코 필요</div></div>
+        <div class="stat"><div class="k">8월 날씨</div><div class="v">28~35℃</div><div class="u">덥고 습함 · 소나기</div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">비상 연락처</h2></div>
+      <div class="card">
+        <dl class="dl">
+          <dt>주오사카<br>총영사관</dt><dd>+81-6-6213-1401<br><span style="font-size:12px;color:var(--gray-500)">긴급(야간·휴일) +81-90-3050-0746</span></dd>
+          <dt>일본 경찰</dt><dd>110</dd>
+          <dt>구급·화재</dt><dd>119</dd>
+          <dt>숙소 연락처</dt><dd>미정 <span class="badge-tbd">확정 필요</span></dd>
+          <dt>동행자</dt><dd>미정 <span class="badge-tbd">작성 예정</span></dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="note blue">
+      <span>ℹ️</span>
+      <div><b>입국 준비</b> — Visit Japan Web 사전등록(입국심사·세관 QR)을 출발 전에 완료해 두세요. 여권 유효기간 6개월 이상 확인 필요.</div>
+    </div>
+  </section>
+
+  <!-- ===== 2. 일정 ===== -->
+  <section class="panel" id="tab-sched">
+    <div class="sec">
+      <div class="sec-head">
+        <h2 class="sec-title">여행 캘린더</h2>
+        <span class="sec-desc">날짜를 눌러 이동</span>
+      </div>
+      <div class="cal">
+        <div class="cal-head">
+          <button class="cal-nav" id="calPrev" aria-label="이전 달">‹</button>
+          <b id="calTitle">2026년 8월</b>
+          <button class="cal-nav" id="calNext" aria-label="다음 달">›</button>
+        </div>
+        <div class="cal-grid" id="calDow"></div>
+        <div class="cal-grid" id="calBody"></div>
+        <div class="cal-legend"><span><i></i>여행 기간 (8/21 ~ 8/23)</span></div>
+      </div>
+    </div>
+
+    <div class="sec" id="day-1">
+      <div class="card">
+        <div class="day-head"><span class="day-badge">DAY 1</span><span class="d">08.21 (금)</span><span class="w">인천 → 오사카</span></div>
+        <div class="tl">
+          <div class="tl-item fixed"><div class="tl-time">13:20</div><div class="tl-body">
+            <div class="tl-title">인천공항 집결 · 체크인</div><div class="tl-sub">출발 2시간 전 · 터미널 미정</div></div></div>
+          <div class="tl-item fixed"><div class="tl-time">15:20</div><div class="tl-body">
+            <div class="tl-title">인천 출발 (ICN)</div><div class="tl-sub">에어서울</div></div></div>
+          <div class="tl-item fixed"><div class="tl-time">17:00</div><div class="tl-body">
+            <div class="tl-title">간사이공항 도착 (KIX)</div><div class="tl-sub">입국심사 · 수하물 · 유심/와이파이 수령</div></div></div>
+          <div class="tl-item"><div class="tl-time tbd">18:30</div><div class="tl-body">
+            <div class="tl-title">공항 → 시내 이동</div><div class="tl-sub">라피트 / 하루카 / 버스 — 수단 미정</div></div></div>
+          <div class="tl-item"><div class="tl-time tbd">--:--</div><div class="tl-body">
+            <div class="tl-title">숙소 체크인 <span class="badge-tbd">미정</span></div><div class="tl-sub">숙소 확정 후 입력</div></div></div>
+          <div class="tl-item"><div class="tl-time tbd">--:--</div><div class="tl-body">
+            <div class="tl-title">저녁 식사 <span class="badge-tbd">미정</span></div><div class="tl-sub">도톤보리 · 난바 일대 예상</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="day-2">
+      <div class="card">
+        <div class="day-head"><span class="day-badge">DAY 2</span><span class="d">08.22 (토)</span><span class="w">오사카 시내</span></div>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-time tbd">오전</div><div class="tl-body">
+            <div class="tl-title">일정 미정 <span class="badge-tbd">작성 예정</span></div><div class="tl-sub">USJ / 오사카성 / 시내 관광 중 선택</div></div></div>
+          <div class="tl-item"><div class="tl-time tbd">점심</div><div class="tl-body">
+            <div class="tl-title">일정 미정</div><div class="tl-sub">—</div></div></div>
+          <div class="tl-item"><div class="tl-time tbd">오후</div><div class="tl-body">
+            <div class="tl-title">일정 미정</div><div class="tl-sub">—</div></div></div>
+          <div class="tl-item"><div class="tl-time tbd">저녁</div><div class="tl-body">
+            <div class="tl-title">일정 미정</div><div class="tl-sub">—</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="day-3">
+      <div class="card">
+        <div class="day-head"><span class="day-badge">DAY 3</span><span class="d">08.23 (일)</span><span class="w">오사카 → 인천</span></div>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-time tbd">오전</div><div class="tl-body">
+            <div class="tl-title">체크아웃 · 짐 보관 <span class="badge-tbd">미정</span></div><div class="tl-sub">숙소 확정 후 입력</div></div></div>
+          <div class="tl-item"><div class="tl-time tbd">--:--</div><div class="tl-body">
+            <div class="tl-title">마지막 쇼핑 · 자유시간</div><div class="tl-sub">—</div></div></div>
+          <div class="tl-item fixed"><div class="tl-time">15:00</div><div class="tl-body">
+            <div class="tl-title">시내 → 간사이공항 출발</div><div class="tl-sub">이동 45~60분 · 여유 있게</div></div></div>
+          <div class="tl-item fixed"><div class="tl-time">16:00</div><div class="tl-body">
+            <div class="tl-title">공항 도착 · 체크인 · 면세</div><div class="tl-sub">출발 2시간 전</div></div></div>
+          <div class="tl-item fixed"><div class="tl-time">18:00</div><div class="tl-body">
+            <div class="tl-title">간사이 출발 (KIX)</div><div class="tl-sub">에어서울</div></div></div>
+          <div class="tl-item fixed"><div class="tl-time">19:55</div><div class="tl-body">
+            <div class="tl-title">인천 도착 (ICN)</div><div class="tl-sub">여행 종료</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. 교통 ===== -->
+  <section class="panel" id="tab-move">
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">공항 ↔ 시내</h2><span class="sec-desc">간사이공항(KIX) 기준</span></div>
+      <div class="card">
+        <div class="pl"><div class="pl-ico b">🚄</div><div>
+          <div class="pl-t">난카이 라피트</div>
+          <div class="pl-s">KIX → 난바 약 38분 · 편도 약 ¥1,490</div>
+          <div><span class="pl-tag">난바·신사이바시 숙소</span><span class="pl-tag">전 좌석 지정</span></div></div></div>
+        <div class="pl"><div class="pl-ico b">🚆</div><div>
+          <div class="pl-t">JR 특급 하루카</div>
+          <div class="pl-s">KIX → 신오사카 약 50분 · 편도 약 ¥2,900</div>
+          <div><span class="pl-tag">신오사카·교토 방면</span></div></div></div>
+        <div class="pl"><div class="pl-ico b">🚌</div><div>
+          <div class="pl-t">리무진 버스</div>
+          <div class="pl-s">KIX → 난바·우메다 약 50~65분 · 편도 약 ¥1,300</div>
+          <div><span class="pl-tag">짐 많을 때 유리</span></div></div></div>
+        <div class="pl"><div class="pl-ico">🚕</div><div>
+          <div class="pl-t">택시</div>
+          <div class="pl-s">약 ¥18,000~ · 심야 아니면 비권장</div></div></div>
+      </div>
+      <div class="note" style="margin-top:10px"><span>⚠️</span><div><b>이동 수단 미정</b> — 숙소 위치가 정해지면 라피트 · 하루카 · 버스 중 하나로 확정하세요.</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">시내 교통 · 패스</h2></div>
+      <div class="card">
+        <div class="pl"><div class="pl-ico">🎫</div><div>
+          <div class="pl-t">오사카 주유패스</div>
+          <div class="pl-s">1일권 약 ¥3,300 · 지하철 무제한 + 40여 곳 무료입장</div>
+          <div><span class="pl-tag">관광지 3곳 이상이면 이득</span></div></div></div>
+        <div class="pl"><div class="pl-ico">💳</div><div>
+          <div class="pl-t">ICOCA 등 교통 IC카드</div>
+          <div class="pl-s">지하철·버스·편의점 결제 · 모바일 등록 가능</div>
+          <div><span class="pl-tag">가장 무난</span></div></div></div>
+        <div class="pl"><div class="pl-ico">🚇</div><div>
+          <div class="pl-t">지하철 1일 승차권 (엔조이에코)</div>
+          <div class="pl-s">주말·공휴일 ¥620 / 평일 ¥820</div>
+          <div><span class="pl-tag">8/22·23은 주말 요금</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">확정 사항</h2></div>
+      <div class="card"><dl class="dl">
+        <dt>공항 이동</dt><dd>미정 <span class="badge-tbd">선택 필요</span></dd>
+        <dt>교통 패스</dt><dd>미정 <span class="badge-tbd">선택 필요</span></dd>
+        <dt>데이터</dt><dd>미정 <span class="badge-tbd">유심·eSIM·로밍</span></dd>
+      </dl></div>
+    </div>
+  </section>
+
+  <!-- ===== 4. 숙소 ===== -->
+  <section class="panel" id="tab-stay">
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">숙소 정보</h2><span class="sec-desc">2박</span></div>
+      <div class="card"><dl class="dl">
+        <dt>숙소명</dt><dd>미정 <span class="badge-tbd">확정 필요</span></dd>
+        <dt>주소</dt><dd>미정</dd>
+        <dt>체크인</dt><dd>08.21 (금) · 시간 미정</dd>
+        <dt>체크아웃</dt><dd>08.23 (일) · 시간 미정</dd>
+        <dt>객실</dt><dd>미정 (2인 기준)</dd>
+        <dt>요금</dt><dd>미정</dd>
+        <dt>예약번호</dt><dd>미정</dd>
+        <dt>연락처</dt><dd>미정</dd>
+      </dl></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">숙소 후보 지역</h2><span class="sec-desc">참고용</span></div>
+      <div class="card">
+        <div class="pl"><div class="pl-ico b">🏮</div><div>
+          <div class="pl-t">난바 · 신사이바시</div>
+          <div class="pl-s">도톤보리 도보권 · 먹거리와 쇼핑 중심</div>
+          <div><span class="pl-tag">관광 중심</span><span class="pl-tag">라피트 직결</span></div></div></div>
+        <div class="pl"><div class="pl-ico b">🏙</div><div>
+          <div class="pl-t">우메다 (키타)</div>
+          <div class="pl-s">교통 허브 · 백화점 밀집 · 교토·고베 당일치기 유리</div>
+          <div><span class="pl-tag">교통 편의</span></div></div></div>
+        <div class="pl"><div class="pl-ico b">🚉</div><div>
+          <div class="pl-t">신오사카</div>
+          <div class="pl-s">신칸센 이용 시 유리 · 관광지와는 다소 거리</div></div></div>
+        <div class="pl"><div class="pl-ico b">🎢</div><div>
+          <div class="pl-t">유니버설시티</div>
+          <div class="pl-s">USJ 방문 계획이면 유리 · 시내 관광은 불편</div></div></div>
+      </div>
+    </div>
+
+    <div class="tbd-box">숙소가 확정되면 이 탭과 DAY 1 · DAY 3 일정을 함께 업데이트하세요.</div>
+  </section>
+
+  <!-- ===== 5. 맛집·명소 ===== -->
+  <section class="panel" id="tab-place">
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">가볼 곳</h2><span class="sec-desc">후보 · 미확정</span></div>
+      <div class="card">
+        <div class="pl"><div class="pl-ico b">🌃</div><div>
+          <div class="pl-t">도톤보리 · 글리코 사인</div>
+          <div class="pl-s">오사카 대표 야경 · 난바역 도보 5분</div>
+          <div><span class="pl-tag">필수</span><span class="pl-tag">야간</span></div></div></div>
+        <div class="pl"><div class="pl-ico b">🏯</div><div>
+          <div class="pl-t">오사카성 (大阪城)</div>
+          <div class="pl-s">천수각 입장 ¥600 · 8월은 더워서 오전 추천</div>
+          <div><span class="pl-tag">주유패스 무료</span></div></div></div>
+        <div class="pl"><div class="pl-ico b">🎢</div><div>
+          <div class="pl-t">유니버설 스튜디오 재팬 (USJ)</div>
+          <div class="pl-s">하루 통째로 소요 · 티켓 사전 구매 필수</div>
+          <div><span class="pl-tag">방문 여부 미정</span></div></div></div>
+        <div class="pl"><div class="pl-ico b">🐟</div><div>
+          <div class="pl-t">구로몬 시장</div>
+          <div class="pl-s">해산물 · 길거리 먹거리 · 오전 방문 추천</div></div></div>
+        <div class="pl"><div class="pl-ico b">🎡</div><div>
+          <div class="pl-t">우메다 공중정원 · 헵파이브 관람차</div>
+          <div class="pl-s">야경 스팟 · 우메다역 인근</div></div></div>
+        <div class="pl"><div class="pl-ico b">🛍</div><div>
+          <div class="pl-t">신사이바시스지 · 아메리카무라</div>
+          <div class="pl-s">쇼핑 · 드럭스토어 밀집</div></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">먹을 것</h2><span class="sec-desc">후보 · 미확정</span></div>
+      <div class="card">
+        <div class="pl"><div class="pl-ico">🐙</div><div>
+          <div class="pl-t">타코야키</div><div class="pl-s">아지노야 · 코가류 · 와나카 — 가게 미정</div></div></div>
+        <div class="pl"><div class="pl-ico">🥞</div><div>
+          <div class="pl-t">오코노미야키</div><div class="pl-s">미즈노 · 후쿠타로 — 대기 김 · 예약 확인</div></div></div>
+        <div class="pl"><div class="pl-ico">🍢</div><div>
+          <div class="pl-t">쿠시카츠</div><div class="pl-s">다루마(신세카이 본점) — 소스 두 번 찍기 금지</div></div></div>
+        <div class="pl"><div class="pl-ico">🍜</div><div>
+          <div class="pl-t">라멘</div><div class="pl-s">이치란 · 킨류 — 가게 미정</div></div></div>
+        <div class="pl"><div class="pl-ico">🍰</div><div>
+          <div class="pl-t">디저트 · 카페</div><div class="pl-s">리쿠로 치즈케이크 · 팩맨 — 미정</div></div></div>
+      </div>
+    </div>
+
+    <div class="tbd-box">방문이 확정된 곳은 DAY별 일정으로 옮겨 정리하세요.</div>
+  </section>
+
+  <!-- ===== 6. 예산 ===== -->
+  <section class="panel" id="tab-budget">
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">예산 요약</h2><span class="sec-desc">2인 기준 · 미확정</span></div>
+      <div class="g2">
+        <div class="stat"><div class="k">총 예산</div><div class="v">미정</div><div class="u">작성 예정</div></div>
+        <div class="stat"><div class="k">1인당</div><div class="v">미정</div><div class="u">작성 예정</div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">항목별 내역</h2></div>
+      <div class="card">
+        <table class="tb">
+          <thead><tr><th>항목</th><th style="text-align:right">금액</th><th style="width:62px">상태</th></tr></thead>
+          <tbody>
+            <tr><td>항공권 (2인)</td><td class="num">미정</td><td>—</td></tr>
+            <tr><td>숙소 2박</td><td class="num">미정</td><td>—</td></tr>
+            <tr><td>공항 ↔ 시내</td><td class="num">미정</td><td>—</td></tr>
+            <tr><td>시내 교통 · 패스</td><td class="num">미정</td><td>—</td></tr>
+            <tr><td>식비</td><td class="num">미정</td><td>—</td></tr>
+            <tr><td>입장료 · 액티비티</td><td class="num">미정</td><td>—</td></tr>
+            <tr><td>쇼핑 · 기타</td><td class="num">미정</td><td>—</td></tr>
+          </tbody>
+          <tfoot><tr><td>합계</td><td class="num">미정</td><td>—</td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">환전 · 결제</h2></div>
+      <div class="card"><dl class="dl">
+        <dt>환전 금액</dt><dd>미정 <span class="badge-tbd">작성 예정</span></dd>
+        <dt>적용 환율</dt><dd>미정</dd>
+        <dt>결제 수단</dt><dd>미정 (트래블카드 · 현금 · 신용카드)</dd>
+      </dl></div>
+      <div class="note blue" style="margin-top:10px"><span>💡</span>
+        <div>일본은 <b>현금 사용처가 아직 많습니다.</b> 소규모 식당·시장은 현금만 받는 경우가 있어 1인 ¥20,000 내외 현금 준비를 권장합니다.</div></div>
+    </div>
+  </section>
+
+  <!-- ===== 7. 준비물 ===== -->
+  <section class="panel" id="tab-prep">
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">출발 전 체크리스트</h2><span class="sec-desc">자동 저장</span></div>
+      <div class="card" id="listA">
+        <label class="check"><input type="checkbox" data-k="a1"><span class="box">✓</span><span class="ctxt">여권 유효기간 확인<small>잔여 6개월 이상</small></span></label>
+        <label class="check"><input type="checkbox" data-k="a2"><span class="box">✓</span><span class="ctxt">Visit Japan Web 등록<small>입국심사·세관 QR 발급</small></span></label>
+        <label class="check"><input type="checkbox" data-k="a3"><span class="box">✓</span><span class="ctxt">항공권 예약 확인 · 좌석 지정</span></label>
+        <label class="check"><input type="checkbox" data-k="a4"><span class="box">✓</span><span class="ctxt">숙소 예약 확정</span></label>
+        <label class="check"><input type="checkbox" data-k="a5"><span class="box">✓</span><span class="ctxt">데이터 준비<small>유심 · eSIM · 포켓와이파이 중 택 1</small></span></label>
+        <label class="check"><input type="checkbox" data-k="a6"><span class="box">✓</span><span class="ctxt">환전 또는 트래블카드 충전</span></label>
+        <label class="check"><input type="checkbox" data-k="a7"><span class="box">✓</span><span class="ctxt">여행자 보험 가입</span></label>
+        <label class="check"><input type="checkbox" data-k="a8"><span class="box">✓</span><span class="ctxt">교통 패스 · 입장권 사전 구매</span></label>
+      </div>
+      <div class="prog"><i id="progA"></i></div>
+      <p class="prog-txt" id="progAtxt">0 / 8 완료</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">짐 싸기</h2><span class="sec-desc">8월 · 무더위</span></div>
+      <div class="card" id="listB">
+        <label class="check"><input type="checkbox" data-k="b1"><span class="box">✓</span><span class="ctxt">여권 · 항공권 · 예약 바우처</span></label>
+        <label class="check"><input type="checkbox" data-k="b2"><span class="box">✓</span><span class="ctxt">110V 변환 어댑터 (돼지코)</span></label>
+        <label class="check"><input type="checkbox" data-k="b3"><span class="box">✓</span><span class="ctxt">보조배터리<small>기내 반입만 가능 · 위탁 불가</small></span></label>
+        <label class="check"><input type="checkbox" data-k="b4"><span class="box">✓</span><span class="ctxt">여름옷 · 갈아입을 옷<small>땀 많음 · 하루 1벌 여유</small></span></label>
+        <label class="check"><input type="checkbox" data-k="b5"><span class="box">✓</span><span class="ctxt">우산 · 우비<small>8월 소나기 잦음</small></span></label>
+        <label class="check"><input type="checkbox" data-k="b6"><span class="box">✓</span><span class="ctxt">선크림 · 모자 · 선글라스</span></label>
+        <label class="check"><input type="checkbox" data-k="b7"><span class="box">✓</span><span class="ctxt">편한 신발<small>하루 2만보 이상</small></span></label>
+        <label class="check"><input type="checkbox" data-k="b8"><span class="box">✓</span><span class="ctxt">상비약<small>소화제 · 진통제 · 밴드</small></span></label>
+        <label class="check"><input type="checkbox" data-k="b9"><span class="box">✓</span><span class="ctxt">에코백 · 접이식 가방<small>일본은 봉투 유료</small></span></label>
+      </div>
+      <div class="prog"><i id="progB"></i></div>
+      <p class="prog-txt" id="progBtxt">0 / 9 완료</p>
+    </div>
+
+    <div class="note"><span>🧳</span>
+      <div><b>에어서울 수하물</b> — 운임에 따라 위탁 수하물이 별도 유료일 수 있습니다. 예약 내역에서 무료 위탁 허용량을 확인하세요.</div></div>
+  </section>
+
+  <footer class="foot">
+    <div class="seal">大阪</div>
+    <p>오사카 여행 계획 · 2026.08.21 – 08.23<br>내용은 계속 업데이트 예정</p>
+  </footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$(function(){
+
+  /* ---------- 탭 ---------- */
+  function activate(id){
+    var $tab = $('.tab[data-tab="'+id+'"]');
+    if(!$tab.length) return false;
+    $('.tab').removeClass('active');
+    $tab.addClass('active');
+    $('.panel').removeClass('active');
+    $('#tab-'+id).addClass('active');
+    return true;
+  }
+
+  $('#tabs').on('click','.tab',function(){
+    activate($(this).data('tab'));
+    $('html,body').animate({scrollTop:0},180);
+  });
+
+  /* ---------- D-Day ---------- */
+  var TRIP_START = new Date(2026,7,21);   // 2026-08-21 (월은 0부터)
+  var TRIP_END   = new Date(2026,7,23);
+  var MS_PER_DAY = 86400000;
+
+  var today = new Date(); today.setHours(0,0,0,0);
+  var diff = Math.round((TRIP_START - today)/MS_PER_DAY);
+  $('#ddayNum').text(diff > 0 ? 'D-'+diff : (diff === 0 ? 'D-DAY' : 'D+'+Math.abs(diff)));
+
+  /* ---------- 캘린더 ---------- */
+  var viewY = 2026, viewM = 7;
+  var DOW = ['일','월','화','수','목','금','토'];
+
+  $.each(DOW,function(i,d){
+    var cls = i===0 ? 'sun' : (i===6 ? 'sat' : '');
+    $('#calDow').append('<div class="cal-dow '+cls+'">'+d+'</div>');
+  });
+
+  function renderCal(){
+    $('#calTitle').text(viewY+'년 '+(viewM+1)+'월');
+    var firstDow  = new Date(viewY,viewM,1).getDay();
+    var lastDate  = new Date(viewY,viewM+1,0).getDate();
+    var html = '';
+    for(var i=0;i<firstDow;i++) html += '<div class="cal-cell blank"></div>';
+    for(var d=1;d<=lastDate;d++){
+      var cur = new Date(viewY,viewM,d);
+      var isTrip = cur >= TRIP_START && cur <= TRIP_END;
+      var dayNo = isTrip ? Math.round((cur-TRIP_START)/MS_PER_DAY)+1 : 0;
+      html += '<div class="cal-cell'+(isTrip?' trip':'')+'"'+(isTrip?' data-day="'+dayNo+'"':'')+'>'
+            + d + (isTrip?'<span class="dot"></span>':'') + '</div>';
+    }
+    $('#calBody').html(html);
+    // 여행 전후 한 달까지만 이동 허용
+    $('#calPrev').prop('disabled', viewY===2026 && viewM<=6);
+    $('#calNext').prop('disabled', viewY===2026 && viewM>=8);
+  }
+  renderCal();
+
+  $('#calPrev').on('click',function(){ viewM--; if(viewM<0){viewM=11;viewY--;} renderCal(); });
+  $('#calNext').on('click',function(){ viewM++; if(viewM>11){viewM=0;viewY++;} renderCal(); });
+
+  $('#calBody').on('click','.cal-cell.trip',function(){
+    var $target = $('#day-'+$(this).data('day'));
+    $('.cal-cell').removeClass('on');
+    $(this).addClass('on');
+    if($target.length){
+      $('html,body').animate({scrollTop:$target.offset().top - 64},300);
+    }
+  });
+
+  /* ---------- 체크리스트 (브라우저에 저장) ---------- */
+  var STORE_KEY = 'osaka-trip-check';
+  var saved = {};
+  try{ saved = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ saved = {}; }
+
+  function updateProgress(listSel, barSel, txtSel){
+    var $inputs = $(listSel).find('input');
+    var done = $inputs.filter(':checked').length, total = $inputs.length;
+    $(barSel).css('width', total ? (done/total*100)+'%' : '0');
+    $(txtSel).text(done+' / '+total+' 완료');
+  }
+  function refreshProgress(){
+    updateProgress('#listA','#progA','#progAtxt');
+    updateProgress('#listB','#progB','#progBtxt');
+  }
+
+  $('.check input').each(function(){
+    if(saved[$(this).data('k')]){
+      $(this).prop('checked',true).closest('.check').addClass('done');
+    }
+  }).on('change',function(){
+    var checked = $(this).prop('checked');
+    saved[$(this).data('k')] = checked;
+    $(this).closest('.check').toggleClass('done', checked);
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(saved)); }catch(e){}
+    refreshProgress();
+  });
+  refreshProgress();
+
+});
+</script>
+</body>
+</html>
