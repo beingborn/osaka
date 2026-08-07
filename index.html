@@ -159,6 +159,48 @@ a{color:var(--navy-600);text-underline-offset:2px}
 .cal-legend i{display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--navy-50);
   border:1px solid var(--navy);margin-right:4px;vertical-align:-1px}
 
+/* ============ 동선 지도 ============ */
+.rm{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);overflow:hidden}
+.rm-tabs{display:flex;gap:6px;padding:12px 12px 0}
+.rm-tab{flex:1;height:34px;border-radius:9px;background:var(--gray-100);color:var(--gray-500);
+  font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:5px}
+.rm-tab i{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.rm-tab.on{color:#fff}
+.rm-tab.on[data-day="1"]{background:var(--navy)}
+.rm-tab.on[data-day="2"]{background:var(--red)}
+.rm-tab.on[data-day="3"]{background:#0E7C63}
+.rm-stage{padding:6px 10px 0}
+/* viewBox 비율이 세로로 길어 폭을 제한하지 않으면 높이가 과도하게 늘어남 */
+.rm svg{display:block;width:100%;max-width:340px;height:auto;margin:0 auto}
+/* 지역 박스 */
+.rm-zone rect{fill:var(--wash);stroke:var(--gray-300);stroke-width:1}
+.rm-zone .zt{font-size:12.5px;font-weight:800;fill:var(--ink)}
+.rm-zone .zs{font-size:10px;fill:var(--gray-500);font-weight:600}
+/* 지역 간 연결선 (배경) */
+.rm-link{stroke:var(--gray-300);stroke-width:1.5;stroke-dasharray:3 3;fill:none}
+.rm-link-t{font-size:9.5px;fill:var(--gray-500);font-weight:700}
+/* 일차별 경로 */
+.rm-route{display:none}
+.rm-route.on{display:block}
+.rm-route path{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.rm-route .pin circle{stroke:#fff;stroke-width:2}
+.rm-route .pin text{font-size:10.5px;font-weight:800;fill:#fff;text-anchor:middle}
+.rm-route[data-day="1"] path{stroke:var(--navy)}
+.rm-route[data-day="1"] .pin circle{fill:var(--navy)}
+.rm-route[data-day="2"] path{stroke:var(--red)}
+.rm-route[data-day="2"] .pin circle{fill:var(--red)}
+.rm-route[data-day="3"] path{stroke:#0E7C63}
+.rm-route[data-day="3"] .pin circle{fill:#0E7C63}
+/* 하단 순서 요약 */
+.rm-foot{border-top:1px solid var(--gray-100);padding:12px 14px 14px}
+.rm-seq{display:none;font-size:12.5px;color:var(--gray-700);font-weight:600;line-height:1.75;margin:0}
+.rm-seq.on{display:block}
+.rm-seq b{color:var(--ink);font-weight:800}
+.rm-open{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:12.5px;font-weight:700;
+  color:var(--navy-600);background:var(--navy-50);border:1px solid #D3E0F2;border-radius:8px;
+  padding:7px 12px;text-decoration:none}
+
 /* 타임라인 */
 .day-head{display:flex;align-items:center;gap:9px;padding:13px 16px;background:var(--navy);color:#fff}
 .day-badge{background:rgba(255,255,255,.16);border-radius:7px;padding:3px 8px;font-size:11.5px;font-weight:800}
@@ -407,6 +449,115 @@ table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
       </div>
     </div>
 
+    <div class="sec">
+      <div class="sec-head">
+        <h2 class="sec-title">동선 한눈에 보기</h2>
+        <span class="sec-desc">위 = 북쪽 · 개념도</span>
+      </div>
+      <div class="rm">
+        <div class="rm-tabs" id="rmTabs">
+          <button class="rm-tab on" data-day="1"><i></i>DAY 1</button>
+          <button class="rm-tab" data-day="2"><i></i>DAY 2</button>
+          <button class="rm-tab" data-day="3"><i></i>DAY 3</button>
+        </div>
+
+        <div class="rm-stage">
+          <svg viewBox="0 0 340 545" role="img" aria-label="오사카 일차별 이동 동선 개념도">
+            <defs>
+              <marker id="arw1" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 z" fill="#0B2B52"/></marker>
+              <marker id="arw2" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 z" fill="#C8372D"/></marker>
+              <marker id="arw3" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 z" fill="#0E7C63"/></marker>
+            </defs>
+
+            <!-- 지역 간 기본 연결 (배경) -->
+            <g>
+              <!-- 라벨은 경로선(x=132~216)과 겹치지 않도록 우측 끝에 정렬 -->
+              <path class="rm-link" d="M 170,84 L 170,174"/>
+              <text class="rm-link-t" x="338" y="133" text-anchor="end">미도스지선 8분</text>
+              <path class="rm-link" d="M 170,228 L 170,286"/>
+              <text class="rm-link-t" x="214" y="261">도보 7분</text>
+              <path class="rm-link" d="M 240,364 L 262,402"/>
+              <text class="rm-link-t" x="248" y="390">지하철 6분</text>
+              <path class="rm-link" d="M 105,364 L 92,470"/>
+              <text class="rm-link-t" x="110" y="420">라피트 38분</text>
+            </g>
+
+            <!-- 지역 박스 -->
+            <g class="rm-zone">
+              <rect x="78" y="26" width="184" height="58" rx="12"/>
+              <text class="zt" x="170" y="52" text-anchor="middle">우메다 · 키타</text>
+              <text class="zs" x="170" y="69" text-anchor="middle">루쿠아 · 하나다코 · 그르니에</text>
+
+              <rect x="78" y="174" width="184" height="54" rx="12"/>
+              <text class="zt" x="170" y="198" text-anchor="middle">신사이바시</text>
+              <text class="zs" x="170" y="215" text-anchor="middle">파르코 · 파블로 · 다카시마야</text>
+
+              <rect x="52" y="286" width="236" height="78" rx="12"/>
+              <text class="zt" x="170" y="311" text-anchor="middle">도톤보리 · 난바 · 숙소</text>
+              <text class="zs" x="170" y="328" text-anchor="middle">구로몬 시장 · 글리코 사인 · 돈키호테</text>
+              <text class="zs" x="170" y="345" text-anchor="middle">멜론브레드 · 규슈라멘 키오</text>
+
+              <rect x="178" y="402" width="142" height="50" rx="12"/>
+              <text class="zt" x="249" y="424" text-anchor="middle">신세카이</text>
+              <text class="zs" x="249" y="440" text-anchor="middle">통천각 · 쿠시카츠</text>
+
+              <rect x="22" y="470" width="140" height="44" rx="12"/>
+              <text class="zt" x="92" y="490" text-anchor="middle">간사이공항</text>
+              <text class="zs" x="92" y="505" text-anchor="middle">KIX</text>
+            </g>
+
+            <!-- DAY 1 -->
+            <g class="rm-route on" data-day="1">
+              <path d="M 92,470 L 99,420 L 107,368" marker-end="url(#arw1)"/>
+              <g class="pin"><circle cx="36" cy="486" r="10"/><text x="36" y="490">1</text></g>
+              <g class="pin"><circle cx="66" cy="302" r="10"/><text x="66" y="306">2</text></g>
+            </g>
+
+            <!-- DAY 2 -->
+            <g class="rm-route" data-day="2">
+              <path d="M 148,286 L 148,88" marker-end="url(#arw2)"/>
+              <path d="M 196,84 L 196,170" marker-end="url(#arw2)"/>
+              <path d="M 262,200 L 304,200 L 304,392 L 292,404" marker-end="url(#arw2)"/>
+              <path d="M 210,402 L 206,368" marker-end="url(#arw2)"/>
+              <g class="pin"><circle cx="66" cy="302" r="10"/><text x="66" y="306">1</text></g>
+              <g class="pin"><circle cx="96" cy="42" r="10"/><text x="96" y="46">2</text></g>
+              <g class="pin"><circle cx="96" cy="190" r="10"/><text x="96" y="194">3</text></g>
+              <g class="pin"><circle cx="192" cy="418" r="10"/><text x="192" y="422">4</text></g>
+              <g class="pin"><circle cx="274" cy="350" r="10"/><text x="274" y="354">5</text></g>
+            </g>
+
+            <!-- DAY 3 -->
+            <g class="rm-route" data-day="3">
+              <path d="M 132,228 L 132,282" marker-end="url(#arw3)"/>
+              <path d="M 92,364 L 86,420 L 81,466" marker-end="url(#arw3)"/>
+              <g class="pin"><circle cx="96" cy="190" r="10"/><text x="96" y="194">1</text></g>
+              <g class="pin"><circle cx="66" cy="302" r="10"/><text x="66" y="306">2</text></g>
+              <g class="pin"><circle cx="36" cy="486" r="10"/><text x="36" y="490">3</text></g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="rm-foot">
+          <p class="rm-seq on" data-day="1">
+            <b>간사이공항</b> → 라피트 38분 → <b>난카이 난바</b> → 도보 13분 → <b>숙소·도톤보리</b><br>
+            한 방향 북상. 이동만 하는 날이라 동선 부담 없음.
+          </p>
+          <p class="rm-seq" data-day="2">
+            <b>구로몬</b> → <b>우메다</b> → <b>신사이바시</b> → <b>신세카이</b> → <b>도톤보리</b><br>
+            북쪽 끝까지 올라갔다 남쪽 끝까지 내려오는 <b>한 바퀴 루프</b>. 우메다 3곳을 한 덩어리로 묶어 왕복을 1회로 줄였음.
+          </p>
+          <p class="rm-seq" data-day="3">
+            <b>신사이바시</b> → <b>도톤보리·숙소</b> → <b>난카이 난바</b> → <b>간사이공항</b><br>
+            숙소 반경 도보권만 돌다가 그대로 남하. 지하철 탑승 0회.
+          </p>
+          <a class="rm-open" id="rmOpen" href="#" target="_blank" rel="noopener">🗺 구글 지도에서 이 동선 열기 ↗</a>
+        </div>
+      </div>
+    </div>
+
     <div class="sec" id="day-1">
       <div class="card">
         <div class="day-head"><span class="day-badge">DAY 1</span><span class="d">08.21 (금)</span><span class="w">인천 → 오사카</span></div>
@@ -439,64 +590,61 @@ table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
       <div class="card">
         <div class="day-head"><span class="day-badge">DAY 2</span><span class="d">08.22 (토)</span><span class="w">오사카 시내</span></div>
         <div class="tl">
-          <div class="tl-item"><div class="tl-time tbd">08:00</div><div class="tl-body">
-            <div class="tl-title">구로몬 시장 <button class="tip-btn" data-title="구로몬 시장" data-tip="대부분 가게 <b>16:00~17:00 마감</b>.<br>일요일은 문 닫는 가게 급감 (DAY 3 주의).<br><b>현금 결제</b> 위주 · 봉투 유료.">!</button></div>
-            <div class="tl-sub">숙소 도보 7분 · 아침 겸 해산물 간식</div>
+          <div class="tl-item"><div class="tl-time tbd">10:30</div><div class="tl-body">
+            <div class="tl-title">숙소 출발 · 구로몬 시장 둘러보기 <button class="tip-btn" data-title="구로몬 시장 (가볍게 구경)" data-tip="<b>토요일이라 대부분 영업</b> — 3일차(일요일)보다 훨씬 활기참.<br>대부분 가게 16:00~17:00 마감.<br><b>현금 결제</b> 위주 · 봉투 유료.<br>먹거리는 <b>1~2개만</b> — 우메다에서 타코야키 예정.">!</button></div>
+            <div class="tl-sub">숙소 도보 7분 · 구경 위주 25분 · 닛폰바시역이 우메다 가는 길목</div>
             <div class="tl-actions"><a href="https://www.google.com/maps/search/?api=1&query=%E9%BB%92%E9%96%80%E5%B8%82%E5%A0%B4+%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">09:30</div><div class="tl-body">
+          <div class="tl-item"><div class="tl-time tbd">11:10</div><div class="tl-body">
+            <div class="tl-title">닛폰바시 → 우메다 이동</div>
+            <div class="tl-sub">센니치마에선 난바 환승 → 미도스지선 · 약 15분</div>
+          </div></div>
+          <div class="tl-item"><div class="tl-time tbd">11:30</div><div class="tl-body">
             <div class="tl-title">루쿠아 오사카 <button class="tip-btn" data-title="루쿠아 오사카" data-tip="매장 <b>10:00 오픈</b> · 레스토랑은 <b>11:00~</b>.<br>지하 식품관(B2) 영업 시간 별도 확인.<br>우메다역 직결 · 면세 카운터 있음 (여권 지참).">!</button></div>
-            <div class="tl-sub">닛폰바시→우메다 지하철 약 15분 · 10시 오픈 · 쇼핑</div>
+            <div class="tl-sub">우메다역 직결 · 쇼핑 40분</div>
             <div class="tl-actions"><a href="https://maps.app.goo.gl/dPtPUAAYYfP523tr5" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">10:30</div><div class="tl-body">
-            <div class="tl-title">그르니에 우메다점 (Grenier) <button class="tip-btn" data-title="그르니에 우메다점" data-tip="인기 메뉴 <b>오전에 품절</b> 빠름 · 오픈 직후 방문 추천.<br>한큐 그랜드 빌딩 1F · 카드 결제 가능.">!</button></div>
-            <div class="tl-sub">한큐 그랜드 빌딩 1F · 도보 2분 · 카페·빵</div>
-            <div class="tl-actions"><a href="https://maps.app.goo.gl/t2dAP8UxUEAb2Ftu8" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
-          </div></div>
-          <div class="tl-item"><div class="tl-time tbd">11:00</div><div class="tl-body">
-            <div class="tl-title">하나다코 (花だこ) <button class="tip-btn" data-title="하나다코 타코야키" data-tip="新梅田食道街는 <b>미로 구조</b> · 입구에서 안내판 먼저 확인.<br><b>현금 결제</b> 위주 · 동전 잔돈 미리 준비.">!</button></div>
+          <div class="tl-item"><div class="tl-time tbd">12:10</div><div class="tl-body">
+            <div class="tl-title">하나다코 (花だこ) · 점심 <button class="tip-btn" data-title="하나다코 타코야키" data-tip="新梅田食道街는 <b>미로 구조</b> · 입구에서 안내판 먼저 확인.<br><b>현금 결제</b> 위주 · 동전 잔돈 미리 준비.<br>점심 피크에 줄 생김 — 12시 전후 진입 권장.">!</button></div>
             <div class="tl-sub">新梅田食道街 1F · 도보 3분 · 타코야키</div>
             <div class="tl-actions"><a href="https://maps.app.goo.gl/j6Wx6RGbq9t1CDHf8" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">11:30</div><div class="tl-body">
-            <div class="tl-title">헵파이브 관람차 <button class="tip-btn" data-title="헵파이브 관람차" data-tip="운행 <b>11:00~22:45</b> · ¥600 · 1바퀴 약 15분.<br><b>강풍·악천후 시 운행 중지</b> 가능 — 출발 전 확인.<br>평균 대기 15~30분.">!</button></div>
-            <div class="tl-sub">HEP FIVE 7F · 도보 2분 · ¥600</div>
-            <div class="tl-actions"><a href="https://maps.app.goo.gl/xntg83LLpTJquSV56" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
+          <div class="tl-item"><div class="tl-time tbd">12:50</div><div class="tl-body">
+            <div class="tl-title">그르니에 우메다점 (Grenier) <button class="tip-btn" data-title="그르니에 우메다점" data-tip="인기 메뉴 <b>오전에 품절</b> 빠름 — 남은 것 중에서 고를 각오.<br>한큐 그랜드 빌딩 1F · 카드 결제 가능.<br>포장해서 이동 중 먹어도 됨.">!</button></div>
+            <div class="tl-sub">한큐 그랜드 빌딩 1F · 도보 2분 · 카페·빵</div>
+            <div class="tl-actions"><a href="https://maps.app.goo.gl/t2dAP8UxUEAb2Ftu8" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">13:00</div><div class="tl-body">
-            <div class="tl-title">앤드 아일랜드 (AND IRELAND) <button class="tip-btn" data-title="앤드 아일랜드" data-tip="강변 테라스 좌석 인기 · 점심 피크에 <b>대기 발생</b> 가능.<br>도지마강 뷰 명소 · 카드 결제 가능.">!</button></div>
-            <div class="tl-sub">기타하마 · 사카이스지선 약 5분 · 강변 카페 · 점심</div>
-            <div class="tl-actions"><a href="https://maps.app.goo.gl/mB4eiFvX3kyi78Xw9" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
+          <div class="tl-item"><div class="tl-time tbd">13:40</div><div class="tl-body">
+            <div class="tl-title">우메다 → 신사이바시 이동</div>
+            <div class="tl-sub">미도스지선 직통 · 약 8분 · 환승 없음</div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">14:30</div><div class="tl-body">
+          <div class="tl-item"><div class="tl-time tbd">14:00</div><div class="tl-body">
             <div class="tl-title">파르코 신사이바시 <button class="tip-btn" data-title="파르코 신사이바시" data-tip="<b>11:00~21:00</b> 영업 · B1~9F 구성.<br>면세 카운터 있음 (<b>여권 지참</b> 필수).<br>카드 결제 가능 · 패션·잡화 중심.">!</button></div>
-            <div class="tl-sub">기타하마→신사이바시 지하철 2분 · 쇼핑</div>
+            <div class="tl-sub">신사이바시역 직결 · 쇼핑 90분</div>
             <div class="tl-actions"><a href="https://maps.app.goo.gl/s4JAtHBRjH6dpZ7P7" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">16:00</div><div class="tl-body">
+          <div class="tl-item"><div class="tl-time tbd">15:30</div><div class="tl-body">
             <div class="tl-title">파블로 (PABLO) 신사이바시 본점 <button class="tip-btn" data-title="파블로 신사이바시 본점" data-tip="저녁 방문 시 <b>품절 가능</b> — 오후 이른 시간 추천.<br>굽기 선택: <b>레어 (とろとろ)</b> / 웰던.<br>포장 전용 박스 제공 · 카드 결제 가능.">!</button></div>
             <div class="tl-sub">도보 3분 · 치즈 타르트</div>
             <div class="tl-actions"><a href="https://maps.app.goo.gl/d1d4PaG3VKjRaMJz6" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">16:30</div><div class="tl-body">
-            <div class="tl-title">신사이바시 아사이볼 B-lab <button class="tip-btn" data-title="B-lab 아사이볼" data-tip="재료 소진 시 <b>조기 마감</b> 가능.<br>SNS 감성 메뉴 · 카드 결제 가능.">!</button></div>
-            <div class="tl-sub">히가시신사이바시 · 도보 5분</div>
-            <div class="tl-actions"><a href="https://maps.app.goo.gl/cNQteYec4CANgDbj9" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
+          <div class="tl-item"><div class="tl-time tbd">16:00</div><div class="tl-body">
+            <div class="tl-title">신사이바시 → 신세카이 이동</div>
+            <div class="tl-sub">미도스지선 도부츠엔마에역 3정거장 · 약 6분 + 도보 5분</div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">17:30</div><div class="tl-body">
-            <div class="tl-title">신세카이 <button class="tip-btn" data-title="신세카이" data-tip="쿠시카츠 필수 룰 — <b>소스 두 번 찍기 금지</b> (공용 소스통).<br>관광객 혼잡 · 소매치기 주의.<br>통천각 입장 ¥300 · 야경도 볼 만함.">!</button></div>
-            <div class="tl-sub">사카이스지선 에비스초역 3정거장 · 구경 · 쿠시카츠 다루마</div>
+          <div class="tl-item"><div class="tl-time tbd">16:30</div><div class="tl-body">
+            <div class="tl-title">신세카이 · 통천각 · 쿠시카츠 다루마 <button class="tip-btn" data-title="신세카이 · 쿠시카츠" data-tip="쿠시카츠 필수 룰 — <b>소스 두 번 찍기 금지</b> (공용 소스통).<br>다루마 본점은 <b>저녁 피크 대기 20~40분</b> — 17시 전 진입 권장.<br>통천각 입장 ¥300 · 관광객 혼잡, 소지품 주의.">!</button></div>
+            <div class="tl-sub">구경 + 저녁 식사 · 여기서 저녁 해결</div>
             <div class="tl-actions"><a href="https://maps.app.goo.gl/YUiyYrgVkgAg5Gm76" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">19:00</div><div class="tl-body">
-            <div class="tl-title">모미지 <button class="tip-btn" data-title="모미지" data-tip="저녁 피크 <b>예약 권장</b>.<br><b>현금 결제</b> 여부 방문 전 확인 필요.">!</button></div>
-            <div class="tl-sub">이쿠타마초 · 신세카이 도보 10분 · 저녁</div>
-            <div class="tl-actions"><a href="https://maps.app.goo.gl/jkexH7hT6PRCVLtt5" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
+          <div class="tl-item"><div class="tl-time tbd">19:30</div><div class="tl-body">
+            <div class="tl-title">도톤보리 복귀 · 글리코 사인 · 돈키호테 <button class="tip-btn" data-title="도톤보리 야간" data-tip="돈키호테 도톤보리점 <b>새벽 4시까지</b> 영업.<br>면세 카운터 혼잡 — 22시 이후가 비교적 한산.<br>글리코 사인 야경은 <b>에비스바시 다리</b> 위가 정석.">!</button></div>
+            <div class="tl-sub">미도스지선 난바역 · 도보권 · 야경·기념품</div>
+            <div class="tl-actions"><a href="https://www.google.com/maps/search/?api=1&query=%E9%81%93%E9%A0%93%E5%A0%80+%E3%82%B0%E3%83%AA%E3%82%B3%E7%9C%8B%E6%9D%BF" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">21:30</div><div class="tl-body">
-            <div class="tl-title">멜론 브레드 <button class="tip-btn" data-title="멜론 브레드" data-tip="갓 구운 빵 대기 <b>5~10분</b> 소요.<br>늦은 밤엔 재고 소진 가능 · 카드 결제 가능.">!</button></div>
-            <div class="tl-sub">도톤보리 1-5-8 · 숙소 귀환</div>
+          <div class="tl-item"><div class="tl-time tbd">21:00</div><div class="tl-body">
+            <div class="tl-title">멜론 브레드 · 숙소 복귀 <button class="tip-btn" data-title="멜론 브레드" data-tip="갓 구운 빵 대기 <b>5~10분</b> 소요.<br>늦은 밤엔 재고 소진 가능 · 카드 결제 가능.">!</button></div>
+            <div class="tl-sub">도톤보리 1-5-8 · 숙소 도보 5분</div>
             <div class="tl-actions"><a href="https://maps.app.goo.gl/2tiREyPj63wBPoQP9" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
         </div>
@@ -509,30 +657,29 @@ table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
         <div class="tl">
           <div class="tl-item fixed"><div class="tl-time">10:00</div><div class="tl-body">
             <div class="tl-title">체크아웃 · 짐 보관</div><div class="tl-sub">사라사 호텔 도톤보리 · 프런트 짐 보관 무료</div></div></div>
-          <div class="tl-item"><div class="tl-time tbd">10:15</div><div class="tl-body">
-            <div class="tl-title">구로몬 시장 <button class="tip-btn" data-title="구로몬 시장 (일요일 주의)" data-tip="<b>일요일은 문 닫는 가게 급감</b> — 평소의 절반 이하.<br>10:00 전후 오픈 · <b>현금 결제</b> 위주.">!</button></div>
-            <div class="tl-sub">도보 7분 · 아침 겸 마지막 먹거리</div>
-            <div class="tl-actions"><a href="https://www.google.com/maps/search/?api=1&query=%E9%BB%92%E9%96%80%E5%B8%82%E5%A0%B4+%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
-          </div></div>
-          <div class="tl-item"><div class="tl-time tbd">11:00</div><div class="tl-body">
-            <div class="tl-title">신사이바시스지 마지막 쇼핑 <button class="tip-btn" data-title="신사이바시스지 · 다카시마야" data-tip="다카시마야 <b>10:00 오픈</b> (일요일).<br>면세 카운터 지하 1층 · <b>여권 지참</b> 필수.<br>드럭스토어 대부분 09:00~22:00 운영.">!</button></div>
-            <div class="tl-sub">도보 7분 · 다카시마야(10시 오픈) · 파블로 · 드럭스토어</div>
+          <div class="tl-item"><div class="tl-time tbd">10:30</div><div class="tl-body">
+            <div class="tl-title">신사이바시스지 마지막 쇼핑 <button class="tip-btn" data-title="신사이바시스지 · 다카시마야" data-tip="다카시마야 <b>10:00 오픈</b> (일요일).<br>면세 카운터 지하 1층 · <b>여권 지참</b> 필수.<br>드럭스토어 대부분 09:00~22:00 운영.<br>구로몬 시장은 <b>일요일 휴업 가게 다수</b>라 2일차로 옮김.">!</button></div>
+            <div class="tl-sub">도보 7분 · 다카시마야(10시 오픈) · 드럭스토어 · 남은 쇼핑 정리</div>
             <div class="tl-actions"><a href="https://maps.app.goo.gl/eua4QHccv6dUNarD7" target="_blank" rel="noopener" class="map-link">📍 다카시마야 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">12:30</div><div class="tl-body">
-            <div class="tl-title">규슈라멘 키오 <button class="tip-btn" data-title="규슈라멘 키오" data-tip="점심 피크 <b>대기 가능</b> — 일요일 특히 혼잡.<br>영어 메뉴 있음 · 카드 결제 여부 확인.">!</button></div>
-            <div class="tl-sub">난바센니치마에 · 도보권 · 점심</div>
+          <div class="tl-item"><div class="tl-time tbd">12:00</div><div class="tl-body">
+            <div class="tl-title">규슈라멘 키오 <button class="tip-btn" data-title="규슈라멘 키오" data-tip="점심 피크 <b>대기 가능</b> — 일요일 특히 혼잡.<br><b>12시 전 진입</b>하면 대기 거의 없음.<br>영어 메뉴 있음 · 카드 결제 여부 확인.">!</button></div>
+            <div class="tl-sub">난바센니치마에 · 도보권 · 점심 (피크 전 진입)</div>
             <div class="tl-actions"><a href="https://maps.app.goo.gl/44TCPfpi4kHQ1pNMA" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item"><div class="tl-time tbd">13:30</div><div class="tl-body">
-            <div class="tl-title">멜론 브레드 · 도톤보리 마지막 사진 <button class="tip-btn" data-title="멜론 브레드" data-tip="갓 구운 빵 대기 <b>5~10분</b> 소요.<br>이후 숙소 복귀 · 짐 찾고 <b>14:30 전 출발</b> 권장.">!</button></div>
-            <div class="tl-sub">도톤보리 1-5-8 · 숙소 복귀 후 짐 찾기</div>
+          <div class="tl-item"><div class="tl-time tbd">13:00</div><div class="tl-body">
+            <div class="tl-title">멜론 브레드 · 도톤보리 마지막 사진 <button class="tip-btn" data-title="멜론 브레드" data-tip="갓 구운 빵 대기 <b>5~10분</b> 소요.<br>기내에서 먹을 간식도 여기서 해결 가능.">!</button></div>
+            <div class="tl-sub">도톤보리 1-5-8 · 마지막 산책</div>
             <div class="tl-actions"><a href="https://maps.app.goo.gl/2tiREyPj63wBPoQP9" target="_blank" rel="noopener" class="map-link">📍 지도</a></div>
           </div></div>
-          <div class="tl-item fixed"><div class="tl-time">15:00</div><div class="tl-body">
-            <div class="tl-title">시내 → 간사이공항 출발</div><div class="tl-sub">이동 45~60분 · 여유 있게</div></div></div>
-          <div class="tl-item fixed"><div class="tl-time">16:00</div><div class="tl-body">
-            <div class="tl-title">공항 도착 · 체크인 · 면세</div><div class="tl-sub">출발 2시간 전</div></div></div>
+          <div class="tl-item"><div class="tl-time tbd">13:40</div><div class="tl-body">
+            <div class="tl-title">숙소 복귀 · 짐 회수</div>
+            <div class="tl-sub">프런트 보관 짐 찾기 · 난카이 난바역까지 도보 13분</div>
+          </div></div>
+          <div class="tl-item fixed"><div class="tl-time">14:20</div><div class="tl-body">
+            <div class="tl-title">난카이 난바역 출발 → 라피트</div><div class="tl-sub">약 38분 · 전 좌석 지정이라 좌석 확보 시간 필요</div></div></div>
+          <div class="tl-item fixed"><div class="tl-time">15:20</div><div class="tl-body">
+            <div class="tl-title">간사이공항 도착 · 체크인 · 면세</div><div class="tl-sub">출발 2시간 40분 전 · 일요일 오후 혼잡 대비</div></div></div>
           <div class="tl-item fixed"><div class="tl-time">18:00</div><div class="tl-body">
             <div class="tl-title">간사이 출발 (KIX)</div><div class="tl-sub">에어서울</div></div></div>
           <div class="tl-item fixed"><div class="tl-time">19:55</div><div class="tl-body">
@@ -592,9 +739,34 @@ table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
       <div class="sec-head"><h2 class="sec-title">확정 사항</h2></div>
       <div class="card"><dl class="dl">
         <dt>공항 이동</dt><dd><b>난카이 라피트</b> (KIX → 난카이 난바)<br><span style="font-size:12px;color:var(--gray-500)">약 38분 · 편도 ¥1,670 · 이후 도보 13분</span></dd>
-        <dt>교통 패스</dt><dd>미정 <span class="badge-tbd">선택 필요</span></dd>
+        <dt>교통 패스</dt><dd><b>지하철 1일 승차권</b> (DAY 2)<br><span style="font-size:12px;color:var(--gray-500)">주말 ¥620 · 반복 승차 4회 이상 시 이득</span></dd>
         <dt>데이터</dt><dd>미정 <span class="badge-tbd">유심·eSIM·로밍</span></dd>
       </dl></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">패스 선택 가이드</h2><span class="sec-desc">2박 3일 기준</span></div>
+      <table class="tb">
+        <thead><tr><th>패스명</th><th>가격</th><th>특징</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>오사카 주유패스</b></td>
+            <td class="num">¥3,300</td>
+            <td><span style="font-size:12px">지하철 무제한 + 40곳 무료입장<br><span style="color:var(--gray-500)">× 이 일정: 관광지 미정 → 불필요</span></span></td>
+          </tr>
+          <tr>
+            <td><b>지하철 1일권</b></td>
+            <td class="num">¥620</td>
+            <td><span style="font-size:12px">하루 무제한 승차<br><span style="color:var(--gray-500)">✓ DAY 2 추천 (우메다·신사이바시·신세카이 이동 4~5회)</span></span></td>
+          </tr>
+          <tr>
+            <td><b>ICOCA</b></td>
+            <td class="num">¥2,000</td>
+            <td><span style="font-size:12px">카드 충전식 · 편의점도 결제 가능<br><span style="color:var(--gray-500)">✓ 가장 무난한 선택</span></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note blue" style="margin-top:10px"><span>✅</span><div><b>추천 조합</b> — 지하철 1일권(DAY 2: ¥620) + ICOCA(간사이공항 구매: ¥2,000 충전식) · 총 교통비 ¥3,960</div></div>
     </div>
   </section>
 
@@ -708,8 +880,9 @@ table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
           <tbody>
             <tr><td>항공권 (2인)</td><td class="num">미정</td><td>—</td></tr>
             <tr><td>숙소 2박</td><td class="num">미정</td><td>—</td></tr>
-            <tr><td>공항 ↔ 시내</td><td class="num">미정</td><td>—</td></tr>
-            <tr><td>시내 교통 · 패스</td><td class="num">미정</td><td>—</td></tr>
+            <tr><td>난카이 라피트 (왕복)</td><td class="num">¥3,340</td><td>✓</td></tr>
+            <tr><td>지하철 1일 승차권</td><td class="num">¥620</td><td>✓</td></tr>
+            <tr><td>ICOCA 카드 (충전)</td><td class="num">¥2,000</td><td>권장</td></tr>
             <tr><td>식비</td><td class="num">미정</td><td>—</td></tr>
             <tr><td>입장료 · 액티비티</td><td class="num">미정</td><td>—</td></tr>
             <tr><td>쇼핑 · 기타</td><td class="num">미정</td><td>—</td></tr>
@@ -857,10 +1030,55 @@ $(function(){
     }
   });
 
-  /* ---------- 체크리스트 (브라우저에 저장) ---------- */
-  var STORE_KEY = 'osaka-trip-check';
+  /* ---------- 동선 지도 ---------- */
+  // 구글 지도 길찾기용 실제 장소명(일본어). 순서 = 방문 순서.
+  var ROUTE_PLACES = {
+    1: ['関西国際空港','南海なんば駅','さらさホテル道頓堀'],
+    2: ['黒門市場','ルクア大阪','新梅田食道街','心斎橋PARCO','新世界 大阪','道頓堀'],
+    3: ['心斎橋筋商店街','道頓堀','さらさホテル道頓堀','南海なんば駅','関西国際空港']
+  };
+
+  function buildMapUrl(day){
+    var places = ROUTE_PLACES[day];
+    var origin = encodeURIComponent(places[0]);
+    var dest   = encodeURIComponent(places[places.length-1]);
+    var url = 'https://www.google.com/maps/dir/?api=1&travelmode=transit'
+            + '&origin=' + origin + '&destination=' + dest;
+    if(places.length > 2){
+      var mid = $.map(places.slice(1,-1), function(p){ return encodeURIComponent(p); });
+      url += '&waypoints=' + mid.join('%7C');   // %7C = 경유지 구분자 '|'
+    }
+    return url;
+  }
+
+  function showRoute(day){
+    $('.rm-tab').removeClass('on').filter('[data-day="'+day+'"]').addClass('on');
+    $('.rm-route').removeClass('on').filter('[data-day="'+day+'"]').addClass('on');
+    $('.rm-seq').removeClass('on').filter('[data-day="'+day+'"]').addClass('on');
+    $('#rmOpen').attr('href', buildMapUrl(day));
+  }
+
+  $('#rmTabs').on('click','.rm-tab',function(){ showRoute($(this).data('day')); });
+  showRoute(1);
+
+  /* ---------- 체크리스트 (서버 파일 저장) ---------- */
   var saved = {};
-  try{ saved = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch(e){ saved = {}; }
+
+  // 서버에서 현재 상태 로드
+  function loadChecks(){
+    $.getJSON('/api/checks', function(data){
+      saved = data;
+      $('.check input').each(function(){
+        var key = $(this).data('k');
+        if(saved[key]){
+          $(this).prop('checked', true).closest('.check').addClass('done');
+        }
+      });
+      refreshProgress();
+    }).fail(function(){
+      console.warn('서버 연결 실패 - 로컬 캐시 사용');
+    });
+  }
 
   function updateProgress(listSel, barSel, txtSel){
     var $inputs = $(listSel).find('input');
@@ -873,18 +1091,28 @@ $(function(){
     updateProgress('#listB','#progB','#progBtxt');
   }
 
-  $('.check input').each(function(){
-    if(saved[$(this).data('k')]){
-      $(this).prop('checked',true).closest('.check').addClass('done');
-    }
-  }).on('change',function(){
+  // 서버에 상태 저장
+  function saveChecks(){
+    $.ajax({
+      url: '/api/checks',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(saved)
+    }).fail(function(){
+      console.warn('저장 실패');
+    });
+  }
+
+  $('.check input').on('change', function(){
     var checked = $(this).prop('checked');
     saved[$(this).data('k')] = checked;
     $(this).closest('.check').toggleClass('done', checked);
-    try{ localStorage.setItem(STORE_KEY, JSON.stringify(saved)); }catch(e){}
     refreshProgress();
+    saveChecks();
   });
-  refreshProgress();
+
+  // 초기 로드
+  loadChecks();
 
   /* ---------- 팁 바텀 시트 ---------- */
   var $tipOverlay = $('#tipOverlay');
