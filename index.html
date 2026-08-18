@@ -383,7 +383,7 @@ table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
           <div class="mid"><div class="dur">1h 40m</div><div class="line"></div></div>
           <div class="pt"><div class="time">17:00</div><div class="code">KIX</div><div class="name">간사이</div></div>
         </div>
-        <p class="flight-note">예약 확정 · 성인 2인 · 일석선석 · 공항 도착 권장 13:20 (2시간 전)</p>
+        <p class="flight-note">예약 확정 · 성인 2인 · 좌석 16A·16B (B구역) · 공항 도착 권장 13:20 (2시간 전)</p>
       </div>
 
       <div class="card">
@@ -397,7 +397,7 @@ table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
           <div class="mid"><div class="dur">1h 55m</div><div class="line"></div></div>
           <div class="pt"><div class="time">19:55</div><div class="code">ICN</div><div class="name">인천</div></div>
         </div>
-        <p class="flight-note">예약 확정 · 성인 2인 · 일석선석 · 공항 도착 권장 16:00 (2시간 전)</p>
+        <p class="flight-note">예약 확정 · 성인 2인 · 좌석 23A·23B (B구역) · 공항 도착 권장 16:00 (2시간 전)</p>
       </div>
     </div>
 
@@ -860,6 +860,7 @@ table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
           <tbody>
             <tr><td>항공권 (2인)</td><td class="num">미정</td><td>—</td></tr>
             <tr><td>숙소 2박</td><td class="num">미정</td><td>—</td></tr>
+            <tr><td>사전좌석 지정 (2인×2구간)</td><td class="num">₩16,000</td><td>✓</td></tr>
             <tr><td>난카이 라피트 (왕복)</td><td class="num">¥3,340</td><td>✓</td></tr>
             <tr><td>지하철 1일 승차권</td><td class="num">¥620</td><td>✓</td></tr>
             <tr><td>식비</td><td class="num">미정</td><td>—</td></tr>
@@ -888,18 +889,18 @@ table.tb{width:100%;border-collapse:collapse;font-size:13.5px}
     <div class="sec">
       <div class="sec-head"><h2 class="sec-title">출발 전 체크리스트</h2><span class="sec-desc">자동 저장</span></div>
       <div class="card" id="listA">
-        <label class="check"><input type="checkbox" data-k="a1"><span class="box">✓</span><span class="ctxt">여권 유효기간 확인<small>잔여 6개월 이상</small></span></label>
-        <label class="check"><input type="checkbox" data-k="a2"><span class="box">✓</span><span class="ctxt">Visit Japan Web 등록<small>입국심사·세관 QR 발급</small></span></label>
-        <label class="check"><input type="checkbox" data-k="a3"><span class="box">✓</span><span class="ctxt">항공권 예약 확인 · 좌석 지정</span></label>
-        <label class="check"><input type="checkbox" data-k="a4"><span class="box">✓</span><span class="ctxt">숙소 예약 확정</span></label>
-        <label class="check"><input type="checkbox" data-k="a5"><span class="box">✓</span><span class="ctxt">데이터 준비<small>유심 · eSIM · 포켓와이파이 중 택 1 · 공항에서 구매 가능</small></span></label>
+        <label class="check done"><input type="checkbox" data-k="a1" checked><span class="box">✓</span><span class="ctxt">여권 유효기간 확인<small>잔여 6개월 이상</small></span></label>
+        <label class="check done"><input type="checkbox" data-k="a2" checked><span class="box">✓</span><span class="ctxt">Visit Japan Web 등록<small>입국심사·세관 QR 발급</small></span></label>
+        <label class="check done"><input type="checkbox" data-k="a3" checked><span class="box">✓</span><span class="ctxt">항공권 예약 확인 · 좌석 지정</span></label>
+        <label class="check done"><input type="checkbox" data-k="a4" checked><span class="box">✓</span><span class="ctxt">숙소 예약 확정</span></label>
+        <label class="check done"><input type="checkbox" data-k="a5" checked><span class="box">✓</span><span class="ctxt">데이터 준비<small>유심 · eSIM · 포켓와이파이 중 택 1 · 공항에서 구매 가능</small></span></label>
         <label class="check"><input type="checkbox" data-k="a6"><span class="box">✓</span><span class="ctxt">환전 또는 트래블카드 충전<small>일본 현금 사용처 多 · 1인 ¥20,000 권장</small></span></label>
-        <label class="check"><input type="checkbox" data-k="a7"><span class="box">✓</span><span class="ctxt">난카이 라피트 좌석 사전 예약<small>β72호 · 01호 차량 03·04번 · 예약 완료</small></span></label>
+        <label class="check done"><input type="checkbox" data-k="a7" checked><span class="box">✓</span><span class="ctxt">난카이 라피트 좌석 사전 예약<small>β72호 · 01호 차량 03·04번 · 예약 완료</small></span></label>
         <label class="check"><input type="checkbox" data-k="a8"><span class="box">✓</span><span class="ctxt">지하철 1일권 구매<small>DAY 2 · ¥620 · 지하철역 현장 구매</small></span></label>
-        <label class="check"><input type="checkbox" data-k="a9"><span class="box">✓</span><span class="ctxt">여행자 보험 가입</span></label>
+        <label class="check done"><input type="checkbox" data-k="a9" checked><span class="box">✓</span><span class="ctxt">여행자 보험 가입</span></label>
       </div>
       <div class="prog"><i id="progA"></i></div>
-      <p class="prog-txt" id="progAtxt">0 / 9 완료</p>
+      <p class="prog-txt" id="progAtxt">7 / 9 완료</p>
     </div>
 
     <div class="sec">
@@ -1058,6 +1059,7 @@ $(function(){
       refreshProgress();
     }).fail(function(){
       console.warn('서버 연결 실패 - 로컬 캐시 사용');
+      refreshProgress();
     });
   }
 
